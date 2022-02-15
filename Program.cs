@@ -5,8 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddEntityFrameworkNpgsql()
-    .AddDbContext<ApplicationDbContext>();
+    builder.Services.AddEntityFrameworkNpgsql()
+        .AddDbContext<ApplicationDbContext>();
 
 var app = builder.Build();
 

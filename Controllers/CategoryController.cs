@@ -16,5 +16,9 @@ namespace asp_net_core_mvc.Controllers
             IEnumerable<Category> objList = _db.Category;
             return View(objList);
         }
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }

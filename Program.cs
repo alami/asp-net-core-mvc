@@ -1,7 +1,12 @@
+using asp_net_core_mvc.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddEntityFrameworkNpgsql()
+    .AddDbContext<ApplicationDbContext>();
 
 var app = builder.Build();
 

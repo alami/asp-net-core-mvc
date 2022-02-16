@@ -24,13 +24,34 @@ namespace asp_net_core_mvc.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Category obj)
         {
-            if (ModelState.IsValid)
+             if (ModelState.IsValid)
             {
                 _db.Category.Add(obj);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View();
+            return View(obj);
         }
+        public IActionResult Edit(int? id)
+        {
+            if(id==null || id==0) { return NotFound(); }
+            Category obj = _db.Category.Find(id);
+            if (obj==null) { return NotFound(); }
+            return View(obj);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Category obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Category.Update(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(obj);
+        }
+
+
     }
 }

@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 
 Data/ApplicationDbContext.cs
+wwwroot/fontawesome/

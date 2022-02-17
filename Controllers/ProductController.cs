@@ -1,5 +1,6 @@
 ﻿using asp_net_core_mvc.Data;
 using asp_net_core_mvc.Models;
+using asp_net_core_mvc.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -23,20 +24,26 @@ namespace asp_net_core_mvc.Controllers
         }
         public IActionResult Upsert(int? id)
         {
-            IEnumerable<SelectListItem> CategoryDropDown = _db.Category.Select(i =>
+            /*IEnumerable<SelectListItem> CategoryDropDown = _db.Category.Select(i =>
                 new SelectListItem { Text = i.Name, Value=i.Id.ToString() });
             ViewBag.CategoryDropDown = CategoryDropDown;
 
-            Product product = new Product();
+            Product product = new Product();*/
+            ProductVM productVM = new ProductVM()
+            {
+                Product = new Product(),
+                CategorySelectList = _db.Category.Select(i =>
+                   new SelectListItem { Text = i.Name, Value = i.Id.ToString() })
+            };
             if (id == null)
             {
-                return View(product); //new -> insert
+                return View(productVM); //new -> insert
             } else
             {
-                product = _db.Product.Find(); //update
-                if(product==null) { return NotFound(); }
+                productVM.Product = _db.Product.Find(); //update
+                if(productVM.Product == null) { return NotFound(); }
             }
-            return View(product);
+            return View(productVM);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

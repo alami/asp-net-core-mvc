@@ -1,6 +1,7 @@
 ﻿using asp_net_core_mvc.Data;
 using asp_net_core_mvc.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace asp_net_core_mvc.Controllers
 {
@@ -22,6 +23,10 @@ namespace asp_net_core_mvc.Controllers
         }
         public IActionResult Upsert(int? id)
         {
+            IEnumerable<SelectListItem> CategoryDropDown = _db.Category.Select(i =>
+                new SelectListItem { Text = i.Name, Value=i.Id.ToString() });
+            ViewBag.CategoryDropDown = CategoryDropDown;
+
             Product product = new Product();
             if (id == null)
             {

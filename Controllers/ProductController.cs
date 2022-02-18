@@ -33,8 +33,9 @@ namespace asp_net_core_mvc.Controllers
             ProductVM productVM = new ProductVM()
             {
                 Product = new Product(),
-                CategorySelectList = _db.Category.Select(i =>
-                   new SelectListItem { Text = i.Name, Value = i.Id.ToString() })
+                CategorySelectList = _db.Category.Select(i => new SelectListItem { 
+                    Text = i.Name, Value = i.Id.ToString() 
+                })
             };
             if (id == null)
             {
@@ -105,6 +106,11 @@ namespace asp_net_core_mvc.Controllers
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            productVM.CategorySelectList = _db.Category.Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
             return View(productVM);
         }
         public IActionResult Delete(int? id)

@@ -9,26 +9,26 @@ namespace asp_net_core_mvc.Controllers
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext _db;
-        public ProductController(ApplicationDbContext db)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public ProductController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment)
         {
             _db = db;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
             IEnumerable<Product> objList = _db.Product;
-            foreach (Product obj in objList)
-            {
-                obj.Category = _db.Category.FirstOrDefault(u => u.Id == obj.CategoryId);
-            }
+            /*foreach (Product obj in objList)            
+                obj.Category = _db.Category.FirstOrDefault(u => u.Id == obj.CategoryId); 
+            */
             return View(objList);
         }
+
+        //GET - UPSERT
         public IActionResult Upsert(int? id)
         {
-            /*IEnumerable<SelectListItem> CategoryDropDown = _db.Category.Select(i =>
-                new SelectListItem { Text = i.Name, Value=i.Id.ToString() });
-            ViewBag.CategoryDropDown = CategoryDropDown;
+            //Product product = new Product();
 
-            Product product = new Product();*/
             ProductVM productVM = new ProductVM()
             {
                 Product = new Product(),
@@ -40,22 +40,50 @@ namespace asp_net_core_mvc.Controllers
                 return View(productVM); //new -> insert
             } else
             {
-                productVM.Product = _db.Product.Find(); //update
+                productVM.Product = _db.Product.Find(id); //update
                 if(productVM.Product == null) { return NotFound(); }
             }
             return View(productVM);
         }
+
+        //POST - UPSERT
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(Product obj)
+        public IActionResult Upsert(ProductVM productVM)
         {
-             if (ModelState.IsValid)
+            
+            if (ModelState.IsValid)
             {
-                _db.Product.Add(obj);
+                var files = HttpContext.Request.Form.Files;
+                string webRootPath = _webHostEnvironment.WebRootPath;
+
+                if (productVM.Product.Id == 0)
+                {
+                    //Creating
+                    string upload = webRootPath + WC.ImagePath;
+                    string fileName = Guid.NewGuid().ToString();
+                    string extension = Path.GetExtension(files[0].FileName);
+
+                    using (var fileStream = new FileStream(Path.Combine(upload, fileName + extension), FileMode.Create))
+                    {
+                        files[0].CopyTo(fileStream);
+                    }
+
+                    productVM.Product.Image = fileName + extension;
+
+                    _db.Product.Add(productVM.Product);
+                }
+                else
+                {
+                    //Updating
+
+
+                     
+                    return RedirectToAction("Index");
+                }
                 _db.SaveChanges();
-                return RedirectToAction("Index");
             }
-            return View(obj);
+            return View(productVM);
         }
         public IActionResult Delete(int? id)
         {

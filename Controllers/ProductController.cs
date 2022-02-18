@@ -28,8 +28,6 @@ namespace asp_net_core_mvc.Controllers
         //GET - UPSERT
         public IActionResult Upsert(int? id)
         {
-            //Product product = new Product();
-
             ProductVM productVM = new ProductVM()
             {
                 Product = new Product(),
@@ -39,13 +37,15 @@ namespace asp_net_core_mvc.Controllers
             };
             if (id == null)
             {
+                //Create
                 return View(productVM); //new -> insert
             } else
             {
-                productVM.Product = _db.Product.Find(id); //update
+                //Update
+                productVM.Product = _db.Product.Find(id); 
                 if(productVM.Product == null) { return NotFound(); }
+                return View(productVM);
             }
-            return View(productVM);
         }
 
         //POST - UPSERT
@@ -54,8 +54,8 @@ namespace asp_net_core_mvc.Controllers
         public IActionResult Upsert(ProductVM productVM)
         {
             
-            if (ModelState.IsValid)
-            {
+            /*if (ModelState.IsValid)
+            {*/
                 var files = HttpContext.Request.Form.Files;
                 string webRootPath = _webHostEnvironment.WebRootPath;
 
@@ -105,13 +105,13 @@ namespace asp_net_core_mvc.Controllers
                 }
                 _db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            /*}
             productVM.CategorySelectList = _db.Category.Select(i => new SelectListItem
             {
                 Text = i.Name,
                 Value = i.Id.ToString()
             });
-            return View(productVM);
+            return View(productVM);*/
         }
         //GET - Delete
         public IActionResult Delete(int? id)

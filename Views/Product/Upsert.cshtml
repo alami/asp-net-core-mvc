@@ -79,8 +79,7 @@
                             }
                         </div>
                         <div class="col">
-                            <a asp-action="Index" class="btn btn-success w-100" >
-                                <i class="fa-solid fa-arrow-right-from-bracket"></i> Back
+                            <a asp-action="Index" class="btn btn-success w-100"><i class="fas fa-sign-out-alt"></i> Back</a>
                             </a>
                         </div>
                     </div>
@@ -97,25 +96,25 @@
      </div>
 </form>
 @section Scripts{ 
-    @{ <partial name="_ValidationScriptsPartial" /> }
-    <script>
-
-    $(document).ready(function() {
-      $('.summernote').summernote({
-          height: 250
-      })
-    })
-
-    function validateInput () {
-        if(document.getElementById("uploadBox").value == "") {
-            Swal.fire(
-              'Error!',
-              'Please upload an image!',
-              'error'
-            ) 
-            return false
-        }
-        return true
+    @{ 
+        <partial name="_ValidationScriptsPartial" /> 
     }
+    <script>
+        $(document).ready(function () {
+            $('.summernote').summernote({
+                height:250
+            });
+        });
+        function validateInput() {
+            if (document.getElementById("uploadBox").value == "") {
+                Swal.fire(
+                    'Error!',
+                    'Please upload an Image!',
+                    'error'
+                )
+                return false;
+            }
+            return true;
+        }    
     </script>
 }

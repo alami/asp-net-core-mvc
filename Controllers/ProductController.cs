@@ -113,22 +113,33 @@ namespace asp_net_core_mvc.Controllers
             });
             return View(productVM);
         }
+        //GET - Delete
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0) { return NotFound(); }
-            Product obj = _db.Product.Find(id);
-            if (obj == null) { return NotFound(); }
-            return View(obj);
+            Product product = _db.Product.Include(u=>u.Category).FirstOrDefault(u=>u.Id==id);
+            if (product == null) { return NotFound(); }
+            return View(product);
         }
-        [HttpPost]
+
+        //POST - Delete
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int? id)
         {
-                var obj = _db.Product.Find(id);
-                if (obj == null) { return NotFound(); }
-                _db.Product.Remove(obj);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
+            var obj = _db.Product.Find(id);
+            if (obj == null) { return NotFound(); }
+
+            string upload = _webHostEnvironment.WebRootPath + WC.ImagePath;
+            var oldFile = Path.Combine(upload, obj.Image);
+
+            if (System.IO.File.Exists(oldFile))
+            {
+                System.IO.File.Delete(oldFile);
+            }
+            _db.Product.Remove(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
             return View(obj);
         }
 

@@ -19,10 +19,10 @@ namespace asp_net_core_mvc.Models
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
 
-/*        [Display(Name = "Application Type")]
+        [Display(Name = "Application Type")]
         public int ApplicationTypeId { get; set; }
         [ForeignKey("ApplicationTypeId")]
         public virtual ApplicationType ApplicationType { get; set; }
-*/
+
     }
 }

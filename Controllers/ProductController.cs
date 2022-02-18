@@ -18,10 +18,14 @@ namespace asp_net_core_mvc.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Product> objList = _db.Product;
-            /*foreach (Product obj in objList)            
-                obj.Category = _db.Category.FirstOrDefault(u => u.Id == obj.CategoryId); 
-            */
+            IEnumerable<Product> objList = _db.Product
+                                                .Include(u => u.Category)
+                                                .Include(u => u.ApplicationType);
+            /*foreach (Product obj in objList)
+            {
+                obj.Category = _db.Category.FirstOrDefault(u=>u.Id==obj.CategoryId);
+                obj.ApplicationType = _db.ApplicationType.FirstOrDefault(u=>u.Id==obj.ApplicationTypeId);
+            }*/
             return View(objList);
         }
 
@@ -33,6 +37,11 @@ namespace asp_net_core_mvc.Controllers
                 Product = new Product(),
                 CategorySelectList = _db.Category.Select(i => new SelectListItem { 
                     Text = i.Name, Value = i.Id.ToString() 
+                }),
+                ApplicationTypeSelectList = _db.ApplicationType.Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
                 })
             };
             if (id == null)
@@ -111,13 +120,21 @@ namespace asp_net_core_mvc.Controllers
                 Text = i.Name,
                 Value = i.Id.ToString()
             });
+            productVM.ApplicationTypeSelectList = _db.ApplicationType.Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
             return View(productVM);*/
         }
         //GET - Delete
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0) { return NotFound(); }
-            Product product = _db.Product.Include(u=>u.Category).FirstOrDefault(u=>u.Id==id);
+            Product product = _db.Product
+                .Include(u=>u.Category)
+                .Include(u => u.ApplicationType)
+                .FirstOrDefault(u=>u.Id==id);
             if (product == null) { return NotFound(); }
             return View(product);
         }
@@ -140,9 +157,6 @@ namespace asp_net_core_mvc.Controllers
             _db.Product.Remove(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
-            return View(obj);
         }
-
-
     }
 }

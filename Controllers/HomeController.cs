@@ -1,6 +1,8 @@
 ﻿using asp_net_core_mvc.Data;
 using asp_net_core_mvc.Models;
 using asp_net_core_mvc.Models.ViewModels;
+using asp_net_core_mvc.Utility;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -36,6 +38,19 @@ namespace asp_net_core_mvc.Controllers
                 ExistsInCart = false
             };
             return View(DetailsVM);
+        }
+        [HttpPost, ActionName("Details")]
+        public IActionResult DetailsPost(int id)
+        {
+            List<ShoppingCart> shoppingCartList = new List<ShoppingCart>();
+            if (HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WC.SessionCart) != null
+                && HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WC.SessionCart).Count() > 0)
+            {
+                shoppingCartList = HttpContext.Session.Get<List<ShoppingCart>>(WC.SessionCart);
+            }
+            shoppingCartList.Add(new ShoppingCart { ProductId = id });
+            HttpContext.Session.Set(WC.SessionCart, shoppingCartList);
+            return RedirectToAction(nameof(Index));
         }
         public IActionResult Privacy()
         {

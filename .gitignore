@@ -352,3 +352,4 @@ MigrationBackup/
 Data/ApplicationDbContext.cs
 wwwroot/fontawesome/
 wwwroot/images/product/
+appsettings.json

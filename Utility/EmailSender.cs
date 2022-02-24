@@ -8,15 +8,23 @@ using System.Threading.Tasks;
 namespace asp_net_core_mvc.Utility
 {
     public class EmailSender : IEmailSender
-    {
+    {    
+        private readonly IConfiguration _configuration;
+        public MailJetSettings _mailJetSettings { get; set; }
+        public EmailSender(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
             return Execute(email,subject,htmlMessage);
         }
         public async Task Execute (string email, string subject, string body)
         {
-            MailjetClient client = new MailjetClient("32ce05e349622ccb1dac29f2f73c3202",
-                "124e90f405b147bc177fcdd6ce477dcd")
+            _mailJetSettings = _configuration.GetSection("MailJet").Get<MailJetSettings>();
+
+            MailjetClient client = new MailjetClient(_mailJetSettings.ApiKey, _mailJetSettings.SecretKey)
             {
                 Version = ApiVersion.V3_1,
             };

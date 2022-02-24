@@ -10,7 +10,7 @@ using asp_net_core_mvc.Models;
 namespace asp_net_core_mvc.Controllers
 {
 
-//    [Authorize(Roles = WC.AdminRole)]
+    [Authorize(Roles = WC.AdminRole)]
     public class ApplicationTypeController : Controller
     {
         private readonly ApplicationDbContext _db;

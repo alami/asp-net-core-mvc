@@ -1,12 +1,14 @@
 ﻿using asp_net_core_mvc.Data;
 using asp_net_core_mvc.Models;
 using asp_net_core_mvc.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace asp_net_core_mvc.Controllers
 {
+    [Authorize(Roles = WC.AdminRole)]
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext _db;

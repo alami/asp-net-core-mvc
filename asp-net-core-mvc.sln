@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asp_Utility", "..\Asp_Utili
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asp_Models", "..\Asp_Models\Asp_Models.csproj", "{B9E2A3D5-311A-4315-B9E6-393860599548}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asp_DataAccess", "..\Asp_DataAccess\Asp_DataAccess.csproj", "{4208A1D8-636D-478F-8AC2-7C44A73183BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B9E2A3D5-311A-4315-B9E6-393860599548}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9E2A3D5-311A-4315-B9E6-393860599548}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9E2A3D5-311A-4315-B9E6-393860599548}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4208A1D8-636D-478F-8AC2-7C44A73183BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4208A1D8-636D-478F-8AC2-7C44A73183BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4208A1D8-636D-478F-8AC2-7C44A73183BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4208A1D8-636D-478F-8AC2-7C44A73183BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

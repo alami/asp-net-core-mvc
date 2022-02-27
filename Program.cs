@@ -1,4 +1,6 @@
 using Asp_DataAccess.Data;
+using Asp_DataAccess.Repository;
+using Asp_DataAccess.Repository.IRepository;
 using Asp_Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -20,6 +22,7 @@ builder.Services.AddSession(Options =>
     Options.Cookie.HttpOnly = true;
     Options.Cookie.IsEssential = true;
 });
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddControllersWithViews();
 
     builder.Services.AddEntityFrameworkNpgsql()

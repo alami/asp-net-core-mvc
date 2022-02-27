@@ -1,7 +1,7 @@
 ﻿using asp_net_core_mvc.Data;
 using asp_net_core_mvc.Models;
 using asp_net_core_mvc.Models.ViewModels;
-using asp_net_core_mvc.Utility;
+using Asp_Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;

@@ -1,5 +1,5 @@
 using asp_net_core_mvc.Data;
-using asp_net_core_mvc.Utility;
+using Asp_Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 

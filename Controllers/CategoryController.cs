@@ -1,5 +1,5 @@
 ﻿using asp_net_core_mvc.Data;
-using asp_net_core_mvc.Models;
+using Asp_Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Asp_Utility;

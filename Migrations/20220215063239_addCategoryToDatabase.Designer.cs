@@ -23,7 +23,7 @@ namespace asp_net_core_mvc.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("asp_net_core_mvc.Models.Category", b =>
+            modelBuilder.Entity("Asp_Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

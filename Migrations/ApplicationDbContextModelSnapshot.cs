@@ -22,7 +22,7 @@ namespace asp_net_core_mvc.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("asp_net_core_mvc.Models.ApplicationType", b =>
+            modelBuilder.Entity("Asp_Models.ApplicationType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,7 +39,7 @@ namespace asp_net_core_mvc.Migrations
                     b.ToTable("ApplicationType");
                 });
 
-            modelBuilder.Entity("asp_net_core_mvc.Models.Category", b =>
+            modelBuilder.Entity("Asp_Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -59,7 +59,7 @@ namespace asp_net_core_mvc.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("asp_net_core_mvc.Models.Product", b =>
+            modelBuilder.Entity("Asp_Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -307,7 +307,7 @@ namespace asp_net_core_mvc.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("asp_net_core_mvc.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Asp_Models.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -318,15 +318,15 @@ namespace asp_net_core_mvc.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
-            modelBuilder.Entity("asp_net_core_mvc.Models.Product", b =>
+            modelBuilder.Entity("Asp_Models.Product", b =>
                 {
-                    b.HasOne("asp_net_core_mvc.Models.ApplicationType", "ApplicationType")
+                    b.HasOne("Asp_Models.ApplicationType", "ApplicationType")
                         .WithMany()
                         .HasForeignKey("ApplicationTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("asp_net_core_mvc.Models.Category", "Category")
+                    b.HasOne("Asp_Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)

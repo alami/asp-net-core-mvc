@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "asp-net-core-mvc", "asp-net
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asp_Utility", "..\Asp_Utility\Asp_Utility.csproj", "{93DBC13B-BB05-4F2E-9339-6A721FE64B14}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asp_Models", "..\Asp_Models\Asp_Models.csproj", "{B9E2A3D5-311A-4315-B9E6-393860599548}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{93DBC13B-BB05-4F2E-9339-6A721FE64B14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93DBC13B-BB05-4F2E-9339-6A721FE64B14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93DBC13B-BB05-4F2E-9339-6A721FE64B14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9E2A3D5-311A-4315-B9E6-393860599548}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9E2A3D5-311A-4315-B9E6-393860599548}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9E2A3D5-311A-4315-B9E6-393860599548}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9E2A3D5-311A-4315-B9E6-393860599548}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
